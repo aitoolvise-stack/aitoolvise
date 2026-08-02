@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact AIToolvise"
+  description="Get in touch with AIToolvise — questions, tool suggestions, or corrections."
+>
+  <section class="section container prose">
+    <h1>Contact Us</h1>
+
+    <p>Got a question, a tool suggestion, or spotted something that needs fixing? I read every message myself — there's no support team to route it through, so you're talking directly to me.</p>
+
+    <p>Email: <a href="mailto:aitoolvise@gmail.com">aitoolvise@gmail.com</a></p>
+
+    <p>I aim to respond within 2–3 business days.</p>
+
+    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="d60ab9cd-9964-4c9b-8cc4-fd4963858307" />
+      <input type="hidden" name="subject" value="New message from AIToolvise contact form" />
+      <input type="hidden" name="from_name" value="AIToolvise Contact Form" />
+      <input type="checkbox" name="botcheck" style="display:none" />
+
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-row">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject_line" required />
+      </div>
+
+      <div class="form-row">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-cta">Send Message</button>
+    </form>
+
+    <nav class="related">
+      <p>See also: <a href="/about">About</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/disclaimer">Disclaimer</a> · <a href="/affiliate-disclosure">Affiliate Disclosure</a></p>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { max-width: 720px; line-height: 1.75; }
+  .related { margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--color-border); font-size: var(--fs-sm); color: var(--color-text-muted); }
+
+  .contact-form {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 480px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-row label {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--color-navy);
+  }
+
+  .form-row input,
+  .form-row textarea {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-size: var(--fs-sm);
+    font-family: inherit;
+    background: #ffffff;
+  }
+
+  .form-row input:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--color-blue);
+  }
+
+  .contact-form button {
+    align-self: flex-start;
+  }
+</style>

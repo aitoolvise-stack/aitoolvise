@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const reviews = (await getCollection('reviews', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="AI Tool Reviews — AIToolvise"
+  description="In-depth, honest reviews of the latest AI and SaaS tools."
+>
+  <section class="section container">
+    <h1>Reviews</h1>
+    <p class="intro">Hands-on reviews of AI tools — what they do well, where they fall short, and whether they're worth your money.</p>
+
+    <div class="grid">
+      {reviews.map((review) => (
+        <a href={`/reviews/${review.data.slug ?? review.id}`} class="card-rating">
+          <Image src={review.data.image.src} alt={review.data.image.alt} class="card-rating__image" width={400} height={225} />
+          <h2>{review.data.title}</h2>
+          <p class="card-rating__desc">{review.data.description}</p>
+          {review.data.rating && (
+            <span class="card-rating__score">★ {review.data.rating.toFixed(1)}</span>
+          )}
+        </a>
+      ))}
+    </div>
+
+    {reviews.length === 0 && <p>No reviews published yet — check back soon.</p>}
+  </section>
+</BaseLayout>
+
+<style>
+  .intro { color: var(--color-text-muted); max-width: 640px; margin-bottom: var(--space-4); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3); }
+  .card-rating { display: block; color: inherit; }
+  .card-rating:hover { text-decoration: none; border-color: var(--color-blue); }
+  .card-rating__image { width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius); margin-bottom: var(--space-2); }
+  .card-rating h2 { font-size: var(--fs-lg); margin-bottom: var(--space-1); }
+  .card-rating__desc { color: var(--color-text-muted); font-size: var(--fs-sm); margin-bottom: var(--space-2); }
+</style>

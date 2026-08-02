@@ -1,17 +1,474 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import homeImage from '../assets/AI_Tool_Vise.webp';
+// Your existing category card grid stays exactly as-is —
+// swap this import in for whatever renders /reviews, /compare, etc.
+// import CategoryCard from '../components/CategoryCard.astro';
 
+const categories = [
+  {
+    name: 'Reviews',
+    href: '/reviews',
+    desc: 'AI tool pricing reviews you can trust — real costs, credit systems, and hidden fees for tools like HeyGen, Claude, Cursor, and Runway, broken down before you subscribe.',
+    tag: 'Pricing',
+  },
+  {
+    name: 'Compare',
+    href: '/compare',
+    desc: 'Head-to-head comparisons so you can pick between two tools with real data, not guesswork.',
+    tag: 'Comparisons',
+  },
+  {
+    name: 'How-To',
+    href: '/how-to',
+    desc: 'Step-by-step guides to get the most out of the tools you already use.',
+    tag: 'Guides',
+  },
+  {
+    name: 'Best Tools',
+    href: '/best-tools',
+    desc: 'Curated, ranked lists for specific jobs — best AI video tool, best AI writer, and more.',
+    tag: 'Rankings',
+  },
+  {
+    name: 'Blog',
+    href: '/blog',
+    desc: 'News, trends, and deeper dives into how AI tools are actually changing workflows.',
+    tag: 'News',
+  },
+];
+
+const allReviews = await getCollection('reviews', ({ data }) => !data.draft);
+const latest = allReviews.sort((a, b) => b.data.pubDate - a.data.pubDate).slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="AIToolvise — Honest AI Tool Reviews, Comparisons & Guides"
+  description="Real reviews, comparisons, and guides for AI tools — pricing, credits, and hidden costs explained before you buy."
+>
+
+  <!-- ============ HERO ============ -->
+  <section class="home-hero">
+    <div class="container home-hero__grid">
+      <div class="home-hero__copy">
+        <p class="home-hero__eyebrow">AIToolvise</p>
+        <h1>The AI tools your work actually needs — reviewed, compared, and explained simply.</h1>
+        <p class="home-hero__sub">
+          From pricing breakdowns to step-by-step guides, AIToolvise helps creators,
+          marketers, developers, and anyone exploring AI tools make sense of a fast-moving
+          space — without the marketing spin.
+        </p>
+        <div class="home-hero__ctas">
+          <a href="#categories" class="btn btn-cta">Explore categories</a>
+          <a href="/about" class="btn btn-secondary btn-secondary--on-navy">About AIToolvise</a>
+        </div>
+      </div>
+
+      <div class="home-hero__visual">
+        <div class="sitemap-card">
+          <p class="sitemap-card__title">One site, five ways in</p>
+          <ul class="sitemap-card__list">
+            {categories.map((cat) => (
+              <li>
+                <span class="sitemap-card__tag">{cat.tag}</span>
+                <span class="sitemap-card__name">{cat.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BRAND IMAGE ============ -->
+  <section class="home-brand-image container">
+    <img src={homeImage.src} alt="AI tool vise" />
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="home-steps container">
+    <p class="home-steps__eyebrow">How it works</p>
+    <h2>Three steps, no signup</h2>
+    <div class="home-steps__row">
+      <div class="home-steps__item">
+        <span class="home-steps__num">01</span>
+        <h3>Pick a category</h3>
+        <p>Reviews, comparisons, guides, or rankings — start wherever you need.</p>
+      </div>
+      <div class="home-steps__item">
+        <span class="home-steps__num">02</span>
+        <h3>Read the real numbers</h3>
+        <p>Pricing, credits, fees, and features, checked against what's advertised.</p>
+      </div>
+      <div class="home-steps__item">
+        <span class="home-steps__num">03</span>
+        <h3>Decide with confidence</h3>
+        <p>No spin, no guesswork — just what you need to choose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY AITOOLVISE ============ -->
+  <section class="home-method container">
+    <p class="home-method__eyebrow">Why AIToolvise</p>
+    <h2>Built for how people actually look into AI tools</h2>
+
+    <div class="home-method__row">
+      <div class="home-method__item">
+        <h3>Real testing, every category</h3>
+        <p>Whether it's a pricing review or a best-tools list, we check plans and features ourselves before writing about them.</p>
+      </div>
+      <div class="home-method__item">
+        <h3>No sponsored spin</h3>
+        <p>Affiliate relationships never change our verdict. See our <a href="/affiliate-disclosure">Affiliate Disclosure</a>.</p>
+      </div>
+      <div class="home-method__item">
+        <h3>Organized around real questions</h3>
+        <p>Pricing questions, comparisons, quick how-tos — sorted the way people actually search for AI tool info.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES (unchanged — grid only) ============ -->
+  <section class="home-categories container" id="categories">
+    <p class="home-categories__eyebrow">Where to start</p>
+    <h2>Browse by category</h2>
+    <div class="home-categories__grid">
+      {categories.map((cat) => (
+        <a href={cat.href} class="card-standard home-categories__card">
+          <h3>{cat.name}</h3>
+          <p>{cat.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ LATEST ============ -->
+  {latest.length > 0 && (
+    <section class="home-latest container">
+      <h2>Latest from AIToolvise</h2>
+      <div class="home-latest__grid">
+        {latest.map((entry) => (
+          <a href={`/reviews/${entry.data.slug ?? entry.id}`} class="card-standard home-latest__card">
+            <h3>{entry.data.title}</h3>
+            <p>{entry.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ============ WHY THIS SITE EXISTS ============ -->
+  <section class="home-origin">
+    <div class="container home-origin__inner">
+      <p class="home-origin__eyebrow">Why AIToolvise exists</p>
+      <!-- PERSONALIZE THIS: replace with your real story — even 2-3 honest sentences beat this placeholder -->
+      <p class="home-origin__text">
+        We kept subscribing to AI tools based on a clean pricing page, only to find the
+        real cost — extra seats, credit top-ups, re-render fees — buried in the fine print
+        after we'd already paid. AIToolvise started as a way to check that fine print
+        before committing, so we built the resource we wished existed.
+      </p>
+
+      <div class="home-origin__chips">
+        <span class="home-origin__chips-label">Built for</span>
+        <ul class="home-origin__chips-list">
+          <li>Creators</li>
+          <li>Marketers</li>
+          <li>Developers</li>
+          <li>Small teams</li>
+          <li>Curious researchers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING CTA ============ -->
+  <section class="home-cta">
+    <div class="container home-cta__inner">
+      <h2>Ready to find the right AI tool for you?</h2>
+      <a href="#categories" class="btn btn-cta">Explore categories</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .home-hero {
+    background:
+      radial-gradient(ellipse 600px 400px at 85% 0%, rgba(37, 99, 235, 0.28), transparent 65%),
+      var(--color-navy-light);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    padding-block: var(--space-5);
+  }
+  .home-hero__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  .home-hero__eyebrow {
+    color: var(--color-blue-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-1);
+  }
+  .home-hero h1 {
+    color: #ffffff;
+    font-size: var(--fs-3xl);
+    margin-bottom: var(--space-2);
+  }
+  .home-hero__sub {
+    color: var(--color-text-on-navy);
+    font-size: var(--fs-lg);
+    line-height: var(--lh-normal);
+    max-width: 48ch;
+    margin-bottom: var(--space-3);
+  }
+  .home-hero__ctas {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .btn-secondary--on-navy {
+    border-color: var(--color-navy-light);
+    color: #ffffff;
+  }
+  .btn-secondary--on-navy:hover {
+    border-color: var(--color-blue-light);
+    color: var(--color-blue-light);
+  }
+
+  /* ---------- Hero sitemap card ---------- */
+  .sitemap-card {
+    background: #ffffff;
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.35);
+  }
+  .sitemap-card__title {
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: var(--space-2);
+  }
+  .sitemap-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sitemap-card__list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--fs-sm);
+  }
+  .sitemap-card__list li:last-child { border-bottom: none; }
+  .sitemap-card__name {
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  .sitemap-card__tag {
+    color: var(--color-blue);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--color-surface);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+  }
+
+  /* ---------- Brand image ---------- */
+  .home-brand-image {
+    padding-block: var(--space-4);
+    text-align: center;
+  }
+  .home-brand-image img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+    margin-inline: auto;
+    border-radius: var(--radius);
+  }
+
+  /* ---------- Why AIToolvise ---------- */
+  .home-method {
+    padding-block: var(--space-5);
+    text-align: center;
+  }
+  .home-method__eyebrow {
+    color: var(--color-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-1);
+  }
+  .home-method h2 {
+    max-width: 42ch;
+    margin-inline: auto;
+    margin-bottom: var(--space-4);
+  }
+  .home-method__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+  }
+  .home-method__item {
+    padding-inline: var(--space-3);
+    border-left: 1px solid var(--color-border);
+  }
+  .home-method__item:first-child { border-left: none; padding-left: 0; }
+  .home-method__item h3 { font-size: var(--fs-base); margin-bottom: var(--space-1); }
+  .home-method__item p { color: var(--color-text-muted); font-size: var(--fs-sm); margin: 0; }
+
+  /* ---------- Categories ---------- */
+  .home-categories { padding-block: var(--space-5); }
+  .home-categories__eyebrow {
+    color: var(--color-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-1);
+  }
+  .home-categories__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  .home-categories__card {
+    display: block;
+    transition: border-color 0.15s ease;
+  }
+  .home-categories__card:hover { border-color: var(--color-blue); text-decoration: none; }
+  .home-categories__card h3 { margin-bottom: var(--space-1); }
+  .home-categories__card p { color: var(--color-text-muted); font-size: var(--fs-sm); margin: 0; }
+
+  /* ---------- Latest ---------- */
+  .home-latest { padding-block: var(--space-5); }
+  .home-latest__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  .home-latest__card { display: block; }
+  .home-latest__card:hover { border-color: var(--color-blue); text-decoration: none; }
+  .home-latest__card h3 { margin-bottom: var(--space-1); }
+  .home-latest__card p { color: var(--color-text-muted); font-size: var(--fs-sm); margin: 0; }
+
+  /* ---------- How it works ---------- */
+  .home-steps { padding-block: var(--space-5); text-align: center; }
+  .home-steps__eyebrow {
+    color: var(--color-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-1);
+  }
+  .home-steps h2 { margin-bottom: var(--space-4); }
+  .home-steps__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    text-align: left;
+  }
+  .home-steps__item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+  .home-steps__num {
+    display: block;
+    font-weight: 800;
+    font-size: var(--fs-xl);
+    color: var(--color-blue);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-1);
+  }
+  .home-steps__item h3 { font-size: var(--fs-base); margin-bottom: var(--space-1); }
+  .home-steps__item p { color: var(--color-text-muted); font-size: var(--fs-sm); margin: 0; }
+
+  /* ---------- Why this site exists ---------- */
+  .home-origin { background: var(--color-surface); padding-block: var(--space-5); }
+  .home-origin__inner { max-width: 700px; text-align: center; }
+  .home-origin__eyebrow {
+    color: var(--color-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-2);
+  }
+  .home-origin__text {
+    color: var(--color-text);
+    font-size: var(--fs-lg);
+    line-height: var(--lh-normal);
+    margin-bottom: var(--space-3);
+  }
+  .home-origin__chips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .home-origin__chips-label {
+    font-weight: 700;
+    color: var(--color-navy);
+    font-size: var(--fs-sm);
+  }
+  .home-origin__chips-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .home-origin__chips-list li {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: var(--fs-sm);
+    color: var(--color-navy);
+    font-weight: 500;
+  }
+
+  /* ---------- Closing CTA ---------- */
+  .home-cta { background: var(--color-navy); padding-block: var(--space-5); }
+  .home-cta__inner { text-align: center; }
+  .home-cta h2 { color: #ffffff; margin-bottom: var(--space-3); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .home-hero__grid { grid-template-columns: 1fr; }
+    .home-steps__row { grid-template-columns: 1fr; }
+    .home-method__row { grid-template-columns: 1fr; text-align: center; }
+    .home-method__item {
+      border-left: none;
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-3) 0 0;
+      margin-top: var(--space-3);
+    }
+    .home-method__item:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+  }
+
+  @media (max-width: 640px) {
+    .home-hero h1 { font-size: var(--fs-2xl); }
+    .home-hero__sub { font-size: var(--fs-base); }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Disclaimer', href: '/disclaimer' },
+  { label: 'Affiliate Disclosure', href: '/affiliate-disclosure' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="site-footer__brand">AIToolvise</p>
+
+    <nav aria-label="Footer">
+      <ul class="site-footer__list">
+        {links.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <p class="site-footer__copy">© {year} AIToolvise. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-navy);
+    margin-top: var(--space-5);
+  }
+
+  .site-footer__inner {
+    padding-block: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: center;
+  }
+
+  .site-footer__brand {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: var(--fs-lg);
+    margin: 0;
+  }
+
+  .site-footer__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-footer__list a {
+    color: var(--color-text-on-navy);
+    font-size: var(--fs-sm);
+  }
+  .site-footer__list a:hover { color: #ffffff; }
+
+  .site-footer__copy {
+    color: #94a3b8;
+    font-size: var(--fs-sm);
+    margin: 0;
+  }
+</style>

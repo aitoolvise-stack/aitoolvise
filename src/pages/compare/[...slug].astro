@@ -1,0 +1,178 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('compare', ({ data }) => !data.draft);
+  return posts.map((entry) => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { title, description, pubDate, updatedDate, faq } = entry.data;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
+
+const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: { '@type': 'Organization', name: 'AIToolvise' },
+  publisher: { '@type': 'Organization', name: 'AIToolvise' },
+};
+
+const faqSchema = faq && faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+} : null;
+---
+
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+
+  <article class="post">
+    <header class="post__hero container">
+      <p class="post__eyebrow">Compare</p>
+      <h1>{title}</h1>
+      <p class="post__meta">
+        Published {formattedDate}
+        {updatedDate && ` · Updated ${updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}
+      </p>
+    </header>
+
+    <div class="post__layout container">
+      {toc.length > 0 && (
+        <aside class="post__toc">
+          <p class="post__toc-label">On this page</p>
+          <nav>
+            <ul>
+              {toc.map((h) => (
+                <li><a href={`#${h.slug}`}>{h.text}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+      <div class="post__body">
+        <Content />
+      </div>
+    </div>
+
+    {faq && faq.length > 0 && (
+      <section class="faq container">
+        <h2>Frequently Asked Questions</h2>
+        {faq.map((item) => (
+          <details class="faq__item">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .post__hero { padding-block: var(--space-4) var(--space-3); }
+  .post__eyebrow { color: var(--color-blue); font-weight: 700; font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-1); }
+  .post__meta { color: var(--color-text-muted); font-size: var(--fs-sm); margin: 0; }
+
+  /* Two-column layout: TOC + body */
+  .post__layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-4);
+    align-items: start;
+    padding-block: var(--space-3);
+  }
+
+  /* Safety net: if TOC is ever missing, body spans full width instead of getting squeezed into the 220px column */
+  .post__layout:not(:has(.post__toc)) .post__body {
+    grid-column: 1 / -1;
+  }
+
+  .post__toc {
+    position: sticky;
+    top: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    font-size: var(--fs-sm);
+  }
+  .post__toc-label {
+    font-weight: 700;
+    color: var(--color-navy);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-1);
+  }
+  .post__toc ul { list-style: none; padding: 0; margin: 0; }
+  .post__toc li { margin-bottom: var(--space-1); }
+  .post__toc a { color: var(--color-text-muted); text-decoration: none; }
+  .post__toc a:hover { color: var(--color-blue); }
+
+  .post__body { max-width: 760px; line-height: 1.75; }
+  .post__body :global(h2) { margin-top: var(--space-4); scroll-margin-top: var(--space-3); }
+  .post__body :global(h3) { margin-top: var(--space-3); }
+  .post__body :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    margin-block: var(--space-3);
+  }
+
+  /* Table styling — only applies if a post actually contains a <table>; no effect otherwise */
+  .post__body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: var(--space-3);
+    font-size: var(--fs-sm);
+    table-layout: fixed;
+  }
+  .post__body :global(th) {
+    background: var(--color-navy);
+    color: #ffffff;
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    word-wrap: break-word;
+  }
+  .post__body :global(td) {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+    word-wrap: break-word;
+    vertical-align: top;
+  }
+  .post__body :global(tr:nth-child(even)) { background: var(--color-surface); }
+
+  .faq { padding-block: var(--space-4); max-width: 760px; }
+  .faq__item { border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-1); }
+  .faq__item summary { cursor: pointer; font-weight: 600; color: var(--color-navy); }
+  .faq__item p { margin-top: var(--space-2); color: var(--color-text-muted); }
+
+  @media (max-width: 860px) {
+    .post__layout { grid-template-columns: 1fr; }
+    .post__toc { position: static; }
+  }
+
+  @media (max-width: 640px) {
+    .post__body :global(table) { font-size: 0.75rem; }
+    .post__body :global(th),
+    .post__body :global(td) { padding: 8px 6px; }
+  }
+</style>
