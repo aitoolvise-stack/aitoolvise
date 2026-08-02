@@ -40,7 +40,7 @@ const categories = [
 ];
 
 const allReviews = await getCollection('reviews', ({ data }) => !data.draft);
-const latest = allReviews.sort((a, b) => b.data.pubDate - a.data.pubDate).slice(0, 3);
+const latest = allReviews.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()).slice(0, 3);
 ---
 
 <BaseLayout
