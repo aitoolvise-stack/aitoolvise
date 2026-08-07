@@ -3,7 +3,7 @@ title: "Claude AI Review 2026: Pricing, Pros & Cons"
 description: "Claude AI review 2026: pricing plans, real user feedback, Opus vs Sonnet comparison, and whether Claude is worth paying for."
 pubDate: 2026-08-08
 image:
-  src: "../../assets/reviews/claude-individual-pricing-plans.webp"
+  src: "../../assets/reviews/claude-ai-review.webp"
   alt: "Claude AI individual pricing plans: Free, Pro, and Max"
 rating: 4.3
 toolName: "Claude"
@@ -118,7 +118,7 @@ Compare Claude's scores across review sites and the gap can be pretty striking â
 
 This is the part most people searching for a Claude pricing and review breakdown are really here for. Claude's plans are built around usage volume and model access rather than wildly different feature sets â€” the core experience stays basically the same, and what changes is how much of it you get.
 
-![Claude AI individual pricing plans: Free, Pro, and Max](../../assets/reviews/claude-individual-pricing-plans.webp)
+![Claude AI individual pricing plans: Free, Pro, and Max](../../assets/reviews/claude-ai-review.webp)
 
 | Plan | Price | What You Get |
 |---|---|---|
