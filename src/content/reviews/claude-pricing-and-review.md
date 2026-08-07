@@ -176,4 +176,6 @@ The fair verdict from this Claude pricing and review breakdown is that Claude ea
 
 *This review reflects publicly available information and independent user feedback as of 2026. Pricing, usage limits, and features change periodically — always confirm current details on Anthropic's official pricing page before subscribing.*
 
-**Affiliate Disclosure:** This article may contain affiliate links. If you sign up for Claude or another product through a link on this page, we may earn a commission at no extra cost to you. This helps support the research and testing that goes into guides like this one. Our opinions and recommendations are based on independent research and, where possible, hands-on use of the platform — affiliate relationships don't influence which products we cover or how we rate them.
+## Affiliate Disclosure
+
+This article may contain affiliate links. If you sign up for Claude or another product through a link on this page, we may earn a commission at no extra cost to you. This helps support the research and testing that goes into guides like this one. Our opinions and recommendations are based on independent research and, where possible, hands-on use of the platform — affiliate relationships don't influence which products we cover or how we rate them.
