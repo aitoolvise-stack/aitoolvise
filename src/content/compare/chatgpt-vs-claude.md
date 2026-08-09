@@ -159,4 +159,6 @@ Neither tool is the wrong choice, and both offer genuine free plans worth testin
 
 *This comparison reflects publicly available information and independent user feedback as of 2026. Pricing, features, and usage limits change periodically — always confirm current details directly with each company before subscribing.*
 
-**Affiliate Disclosure:** This article may contain affiliate links. If you sign up for ChatGPT, Claude, or another product through a link on this page, we may earn a commission at no extra cost to you. This helps support the research and testing that goes into guides like this one. Our opinions and recommendations are based on independent research and, where possible, hands-on use of each platform — affiliate relationships don't influence which products we cover or how we rate them.
+## Affiliate Disclosure
+
+ This article may contain affiliate links. If you sign up for ChatGPT, Claude, or another product through a link on this page, we may earn a commission at no extra cost to you. This helps support the research and testing that goes into guides like this one. Our opinions and recommendations are based on independent research and, where possible, hands-on use of each platform — affiliate relationships don't influence which products we cover or how we rate them.
