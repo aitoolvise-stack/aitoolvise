@@ -169,4 +169,6 @@ The honest takeaway from this HeyGen pricing and review breakdown is that the pl
 
 *This review is based on publicly available pricing information and independent user feedback as of 2026. Pricing, credit allocations, and features are subject to change — always confirm current details on HeyGen's official pricing page before subscribing.*
 
-**Affiliate Disclosure:** This article may contain affiliate links. If you sign up for HeyGen or another product through a link on this page, we may earn a commission at no extra cost to you. This helps support the research and testing that goes into guides like this one. Our opinions and recommendations are based on independent research and, where possible, hands-on use of the platform — affiliate relationships don't influence which products we cover or how we rate them.
+## Affiliate Disclosure
+
+This article may contain affiliate links. If you sign up for HeyGen or another product through a link on this page, we may earn a commission at no extra cost to you. This helps support the research and testing that goes into guides like this one. Our opinions and recommendations are based on independent research and, where possible, hands-on use of the platform — affiliate relationships don't influence which products we cover or how we rate them.
