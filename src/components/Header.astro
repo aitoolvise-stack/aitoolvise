@@ -1,5 +1,6 @@
 ---
 // src/components/Header.astro
+import { Image } from 'astro:assets';
 import logo from '../assets/Logo-Photoroom.webp';
 
 const navItems = [
@@ -14,7 +15,7 @@ const navItems = [
 <header class="site-header">
   <div class="container site-header__inner">
     <a href="/" class="site-header__logo" aria-label="AIToolvise home">
-      <img src={logo.src} alt="AIToolvise" />
+      <Image src={logo} alt="AIToolvise" height={58} />
     </a>
 
     <!-- Pure-CSS hamburger: checkbox drives menu state, no JS needed -->

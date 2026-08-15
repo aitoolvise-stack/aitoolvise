@@ -4,6 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+// Self-hosted Inter (replaces Google Fonts <link> — removes render-blocking
+// third-party requests to fonts.googleapis.com / fonts.gstatic.com)
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+
 interface Props {
   title: string;
   description: string;
@@ -56,14 +64,6 @@ const organizationSchema = {
     <meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
     <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:card" content="summary_large_image" />
-
-    <!-- Preconnect + Inter font (weights: 400/500/700/800 cover body, nav, headings, logo) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
   </head>
