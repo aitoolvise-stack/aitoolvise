@@ -13,7 +13,7 @@ const posts = (await getCollection('bestTools', ({ data }) => !data.draft))
     <p class="intro">Curated lists of the best AI tools, organized by use case.</p>
     <div class="grid">
       {posts.map((post) => (
-        <a href={`/best-tools/${post.data.slug ?? post.id}`} class="card-standard">
+        <a href={`/best-tools/${post.data.slug ?? post.id}/`} class="card-standard">
           <Image src={post.data.image.src} alt={post.data.image.alt} class="card-standard__image" width={400} height={225} />
           <h2>{post.data.title}</h2>
           <p class="card-standard__desc">{post.data.description}</p>

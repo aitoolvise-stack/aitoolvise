@@ -6,7 +6,7 @@ import { unified } from '@astrojs/markdown-remark';
 export default defineConfig({
   site: 'https://aitoolvise.com',
   output: 'static',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
 
   // Using the classic, stable JS-based markdown engine instead of Astro's
   // newer Rust-based one (Sätteri), which currently has Windows install issues.

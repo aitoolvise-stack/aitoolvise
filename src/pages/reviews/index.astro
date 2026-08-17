@@ -17,7 +17,7 @@ const reviews = (await getCollection('reviews', ({ data }) => !data.draft))
 
     <div class="grid">
       {reviews.map((review) => (
-        <a href={`/reviews/${review.data.slug ?? review.id}`} class="card-rating">
+        <a href={`/reviews/${review.data.slug ?? review.id}/`} class="card-rating">
           <Image src={review.data.image.src} alt={review.data.image.alt} class="card-rating__image" width={400} height={225} />
           <h2>{review.data.title}</h2>
           <p class="card-rating__desc">{review.data.description}</p>

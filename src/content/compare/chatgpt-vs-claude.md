@@ -42,7 +42,7 @@ ChatGPT is an AI assistant built by OpenAI that handles writing, coding, researc
 
 ## What Is Claude?
 
-Claude is an AI assistant built by Anthropic, built around careful reasoning and natural, considered writing. Its behavior is shaped by an approach Anthropic calls [Constitutional AI](https://www.anthropic.com/news/claudes-constitution), which trains the model against a written set of principles rather than relying purely on after-the-fact human correction. If you want the full picture on what makes Claude distinct — including its model lineup — we've covered that in depth in our [Claude AI review](/reviews/claude-pricing-review/).
+Claude is an AI assistant built by Anthropic, built around careful reasoning and natural, considered writing. Its behavior is shaped by an approach Anthropic calls [Constitutional AI](https://www.anthropic.com/news/claudes-constitution), which trains the model against a written set of principles rather than relying purely on after-the-fact human correction. If you want the full picture on what makes Claude distinct — including its model lineup — we've covered that in depth in our [Claude AI review](/reviews/claude-pricing-and-review/).
 
 ## ChatGPT vs Claude at a Glance
 
@@ -113,7 +113,7 @@ The consumer pricing ladders mirror each other closely, which makes the differen
 | Team | $30/user/month | $25/user/month |
 | Enterprise | Custom | Custom |
 
-One gap worth naming: neither platform has a mid-range option between $20 and $100+. That jump is one of the most commonly cited frustrations in user discussions on both sides, since there's no obvious "I need a bit more, not 5x more" tier to step into. For a deeper breakdown of Claude's specific plans and what each one includes, see our full [Claude pricing and review](/reviews/claude-pricing-review/).
+One gap worth naming: neither platform has a mid-range option between $20 and $100+. That jump is one of the most commonly cited frustrations in user discussions on both sides, since there's no obvious "I need a bit more, not 5x more" tier to step into. For a deeper breakdown of Claude's specific plans and what each one includes, see our full [Claude pricing and review](/reviews/claude-pricing-and-review/).
 
 ## Usage Limits: The Part Nobody Puts in the Headline
 

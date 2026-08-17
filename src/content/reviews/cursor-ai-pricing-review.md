@@ -51,7 +51,7 @@ Here's the full lineup, current as of 2026. Monthly and annual pricing are shown
 | Teams Premium | $120/user/month | ~$96/user/month | 5x Teams Standard's included usage |
 | Enterprise | Custom | Custom | Contact sales, org-wide controls |
 
-If you've read our [Claude pricing and review](/reviews/claude-pricing-review/), this same "the headline number isn't the whole story" pattern shows up again here in Cursor AI pricing — the plan prices are simple, but what they actually buy you depends heavily on how you use the tool day to day.
+If you've read our [Claude pricing and review](/reviews/claude-pricing-and-review/), this same "the headline number isn't the whole story" pattern shows up again here in Cursor AI pricing — the plan prices are simple, but what they actually buy you depends heavily on how you use the tool day to day.
 
 ### What's Included in the Free Hobby Plan?
 
