@@ -39,8 +39,21 @@ const categories = [
   },
 ];
 
-const allReviews = await getCollection('reviews', ({ data }) => !data.draft);
-const latest = allReviews.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()).slice(0, 3);
+// Pull latest posts from every collection, not just reviews, so new
+// compare/best-tools posts surface here too and get a direct homepage link.
+const [allReviews, allCompare, allBestTools] = await Promise.all([
+  getCollection('reviews', ({ data }) => !data.draft),
+  getCollection('compare', ({ data }) => !data.draft),
+  getCollection('bestTools', ({ data }) => !data.draft),
+]);
+
+const latest = [
+  ...allReviews.map((entry) => ({ entry, base: '/reviews/' })),
+  ...allCompare.map((entry) => ({ entry, base: '/compare/' })),
+  ...allBestTools.map((entry) => ({ entry, base: '/best-tools/' })),
+]
+  .sort((a, b) => b.entry.data.pubDate.getTime() - a.entry.data.pubDate.getTime())
+  .slice(0, 6);
 ---
 
 <BaseLayout
@@ -121,7 +134,7 @@ const latest = allReviews.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
       </div>
       <div class="home-method__item">
         <h3>No sponsored spin</h3>
-        <p>Affiliate relationships never change our verdict. See our <a href="/affiliate-disclosure">Affiliate Disclosure</a>.</p>
+        <p>Affiliate relationships never change our verdict. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a>.</p>
       </div>
       <div class="home-method__item">
         <h3>Organized around real questions</h3>
@@ -149,8 +162,8 @@ const latest = allReviews.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
     <section class="home-latest container">
       <h2>Latest from AIToolvise</h2>
       <div class="home-latest__grid">
-        {latest.map((entry) => (
-          <a href={`/reviews/${entry.data.slug ?? entry.id}`} class="card-standard home-latest__card">
+        {latest.map(({ entry, base }) => (
+          <a href={`${base}${entry.data.slug ?? entry.id}/`} class="card-standard home-latest__card">
             <h3>{entry.data.title}</h3>
             <p>{entry.data.description}</p>
           </a>
