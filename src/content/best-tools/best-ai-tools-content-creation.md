@@ -1,6 +1,6 @@
 ---
 title: "Best AI Tools for Content Creation in 2026"
-description: "The best AI tools for content creation in 2026, organized by workflow stage — research, writing, visuals, video, and audio — with real pricing and honest pros and cons."
+description: "The best AI tools for content creation in 2026, organized by workflow stage — research, writing, visuals, video, and audio — with pricing, pros, and cons."
 pubDate: 2026-08-19
 image:
   src: "../../assets/best-tools/best-ai-tools-content-creation.webp"
