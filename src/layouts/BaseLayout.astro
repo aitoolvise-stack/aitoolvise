@@ -46,14 +46,46 @@ const organizationSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75Z6SQ4C96"></script>
+    <!--
+      Google Analytics 4 — deferred loading.
+      The dataLayer/gtag stub and the config call run immediately (tiny, no
+      network), so the pageview is queued and any gtag('event', ...) calls
+      elsewhere on the site still work. The heavy gtag.js file (~179 KiB) is
+      only downloaded after the first user interaction, or ~5s after the page
+      has loaded, whichever comes first. This keeps it out of the critical
+      path that PageSpeed measures (FCP / LCP / TBT).
+    -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-75Z6SQ4C96');
+
+      (function () {
+        var loaded = false;
+        var events = ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'];
+
+        function loadGA() {
+          if (loaded) return;
+          loaded = true;
+          events.forEach(function (e) {
+            window.removeEventListener(e, loadGA);
+          });
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-75Z6SQ4C96';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        events.forEach(function (e) {
+          window.addEventListener(e, loadGA, { once: true, passive: true });
+        });
+
+        // Fallback so visitors who never interact are still counted.
+        window.addEventListener('load', function () {
+          setTimeout(loadGA, 5000);
+        });
+      })();
     </script>
 
     <!-- Favicon set -->

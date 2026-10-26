@@ -24,5 +24,8 @@ export default defineConfig({
 
   build: {
     assets: 'assets',
+    // Inline CSS into the HTML so it is no longer a separate render-blocking
+    // request (fixes most of the "Render-blocking requests" insight on mobile).
+    inlineStylesheets: 'always',
   },
 });
